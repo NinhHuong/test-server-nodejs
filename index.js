@@ -8,8 +8,8 @@ app.use(express.static(__dirname + '/public'));
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false});
+//var bodyParser = require('body-parser');
+//var urlencodedParser = bodyParser.urlencoded({ extended: false});
 var pg = require('pg');
 config = {
   user: 'foxyqsiwlnqyjv',
@@ -54,7 +54,7 @@ app.get("/student/add", function(req, res) {
   });
 });
 
-app.post("/student/add", urlencodedParser, function(req, res) {
+/*app.post("/student/add", urlencodedParser, function(req, res) {
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -73,7 +73,7 @@ app.post("/student/add", urlencodedParser, function(req, res) {
     });
   });
 });
-
+*/
 //edit
 app.get("/student/edit/:id", function(req, res) {
   pool.connect(function(err, client, done) {
@@ -95,7 +95,7 @@ app.get("/student/edit/:id", function(req, res) {
     });
   });
 });
-app.post("/student/edit", urlencodedParser, function(req, res) {
+/*app.post("/student/edit", urlencodedParser, function(req, res) {
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -115,7 +115,7 @@ app.post("/student/edit", urlencodedParser, function(req, res) {
     });
   });
 });
-
+*/
 
 app.get('/', function(request, response) {
   response.render('main');
