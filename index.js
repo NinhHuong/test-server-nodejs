@@ -36,7 +36,7 @@ app.get("/account/signin", function(req, res) {
     }
 
     var queryData = url.parse(req.url, true).query;
-    var sql = "SELECT * FROM account WHERE email = '" + queryData.email + "' and password = '" + queryData.password + "'";
+    var sql = "SELECT * FROM account WHERE email = '" + queryData.email + "'";
     client.query(sql, function(err, result) {
       done();
       if(err) {
@@ -44,11 +44,17 @@ app.get("/account/signin", function(req, res) {
         return console.error('error running query', err);
       }
 
-      var mess = 'fail';
       if(result.rows.length < 1) {
+        var mess = {'account': {'email': false, 'password': false}};
         res.send(mess);
       } else {
-        mess = 'success';
+        if(result.rows[0].password == queryData.password){
+          var mess = {'account': {'email': true, 'password': true}};
+          res.send(mess);
+        } else {
+          var mess = {'account': {'email': true, 'password': false}};
+          res.send(mess);
+        }
         res.send(mess);
       }
     });
