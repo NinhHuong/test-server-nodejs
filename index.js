@@ -8,8 +8,8 @@ app.use(express.static(__dirname + '/public'));
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-//var bodyParser = require('body-parser');
-//var urlencodedParser = bodyParser.urlencoded({ extended: false});
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false});
 var pg = require('pg');
 config = {
   user: 'zjzhfgfgtjulih',
