@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Student - list</title>
+  </head>
+  <body>
+    <table width="500" border="1">
+      <tr>
+        <td>id</td>
+        <td>fullname</td>
+        <td>email</td>
+        <td><a href="../student/add">add</a></td>
+      </tr>
+      <% list_result.rows.forEach(function(st) { %>
+          <tr>
+            <td><%= st.id %></td>
+            <td><%= st.fullname %></td>
+            <td><%= st.email %></td>
+            <td><a href="../student/edit/<%= st.id %>">edit</a> -
+                <a href="../student/delete/<%= st.id %>">delete</a></td>
+          </tr>
+        <% });
+      %>
+    </table>
+  </body>
+</html>
