@@ -12,10 +12,10 @@ app.set('view engine', 'ejs');
 //var urlencodedParser = bodyParser.urlencoded({ extended: false});
 var pg = require('pg');
 config = {
-  user: 'foxyqsiwlnqyjv',
-  database: 'd4ug5pkn3lbq6t',
-  password: '284d7bd04696101423ce32fbd8bd06c3a3e0f9c5baedc12a1128f278101a14d3',
-  host: 'ec2-23-23-228-115.compute-1.amazonaws.com',
+  user: 'zjzhfgfgtjulih',
+  database: 'd2ttqbcsm1cv9c',
+  password: '588ecad81195b7dcb9119206b219ec35f9203c0f0e39dc694763ca13903550e0',
+  host: 'ec2-184-73-199-72.compute-1.amazonaws.com',
   port: 5432,
   ssl: true,
   max: 10,
@@ -54,7 +54,7 @@ app.get("/student/add", function(req, res) {
   });
 });
 
-/*app.post("/student/add", urlencodedParser, function(req, res) {
+app.post("/student/add", urlencodedParser, function(req, res) {
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -73,7 +73,7 @@ app.get("/student/add", function(req, res) {
     });
   });
 });
-*/
+
 //edit
 app.get("/student/edit/:id", function(req, res) {
   pool.connect(function(err, client, done) {
@@ -95,7 +95,7 @@ app.get("/student/edit/:id", function(req, res) {
     });
   });
 });
-/*app.post("/student/edit", urlencodedParser, function(req, res) {
+app.post("/student/edit", urlencodedParser, function(req, res) {
   pool.connect(function(err, client, done) {
     if(err) {
       return console.error('error fetching client from pool', err);
@@ -115,7 +115,6 @@ app.get("/student/edit/:id", function(req, res) {
     });
   });
 });
-*/
 
 app.get('/', function(request, response) {
   response.render('main');
