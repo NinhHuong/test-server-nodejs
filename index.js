@@ -8,9 +8,12 @@ app.use(express.static(__dirname + '/public'));
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
 var bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false});
 var pg = require('pg');
+var url = require('url');
+
 config = {
   user: 'zjzhfgfgtjulih',
   database: 'd2ttqbcsm1cv9c',
@@ -25,6 +28,32 @@ config = {
 //keep connections open for 30 secondes
 //set limit of max 10 idle clients
 var pool = new pg.Pool(config);
+
+app.get("/account/signin", function(req, res) {
+  pool.connect(function(err, client, done) {
+    if(err) {
+      return console.error('error fetching client from pool', err);
+    }
+
+    var queryData = url.parse(req.url, true).query;
+    var sql = "SELECT * FROM account WHERE email = '" + queryData.email + "' and password = '" + queryData.password + "'";
+    client.query(sql, function(err, result) {
+      done();
+      if(err) {
+        res.end();
+        return console.error('error running query', err);
+      }
+
+      var mess = 'fail';
+      if(result.rows.length < 1) {
+        res.send(mess);
+      } else {
+        mess = 'success';
+        res.send(mess);
+      }
+    });
+  });
+});
 
 //show list
 app.get("/student/list", function(req, res) {
@@ -123,5 +152,3 @@ app.get('/', function(request, response) {
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
-
-
